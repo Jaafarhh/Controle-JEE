@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Détails du Client</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="container fade-in">
+    <div class="card">
+        <div class="client-info">
+            <h1 th:text="${client.nom}"></h1>
+            <p><strong>Adresse:</strong> <span th:text="${client.adresse}"></span></p>
+            <p><strong>Téléphone:</strong> <span th:text="${client.telephone}"></span></p>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <h3 th:text="${client.factures.size()}"></h3>
+                <p>Factures totales</p>
+            </div>
+            <div class="stat-card">
+                <h3 th:text="${#numbers.formatDecimal(client.totalSpent, 1, 2)} + ' Dhs'"></h3>
+                <p>Montant total dépensé</p>
+            </div>
+        </div>
+
+        <div class="factures-list">
+            <h2>Liste des Factures</h2>
+
+            <div th:switch="${client.factures}">
+                <p th:case="null" class="text-secondary">Aucune facture trouvée!</p>
+
+                <table th:case="*" class="table">
+                    <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Montant Total</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="facture : ${client.factures}" class="fade-in">
+                        <td th:text="${#dates.format(facture.date, 'dd/MM/yyyy')}"></td>
+                        <td th:text="${#numbers.formatDecimal(facture.montantTotal, 1, 2)} + ' Dhs'"></td>
+                        <td>
+                            <a th:href="@{/facture/edit/{id}(id=${facture.id})}" class="btn btn-third">Modifier</a>
+                            <a th:href="@{/facture/delete/{id}(id=${facture.id})}"
+                               class="btn btn-danger"
+                               onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette facture?')">Supprimer</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="actions">
+            <a href="/facture/new" class="btn btn-primary">Créer une nouvelle facture</a>
+            <a href="/" class="btn btn-secondary">Retour à la liste</a>
+        </div>
+    </div>
+</div>
+<div class="background">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+</body>
+</html>

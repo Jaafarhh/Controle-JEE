@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Liste des Clients</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" th:href="@{css/style.css}" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container fade-in">
+      <div class="card">
+        <h1>Liste des Clients</h1>
+
+        <div th:switch="${clients}">
+          <h2 th:case="null" class="text-secondary">Aucun client trouvé!</h2>
+
+          <div th:case="*">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Nom</th>
+                  <th>Adresse</th>
+                  <th>Téléphone</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="client : ${clients}" class="fade-in">
+                  <td th:text="${client.nom}"></td>
+                  <td th:text="${client.adresse}"></td>
+                  <td th:text="${client.telephone}"></td>
+                  <td>
+                    <a
+                      th:href="@{/client/details/{id}(id=${client.id})}"
+                      class="btn"
+                      >Détails</a
+                    >
+                    <a
+                      th:href="@{/client/edit/{id}(id=${client.id})}"
+                      class="btn btn-third"
+                      >Modifier</a
+                    >
+                    <a
+                      th:href="@{/client/delete/{id}(id=${client.id})}"
+                      class="btn btn-danger"
+                      onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce client?')"
+                      >Supprimer</a
+                    >
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="actions">
+          <a href="/client/new" class="btn btn-primary"
+            >Ajouter un nouveau client</a
+          >
+          <a href="/facture/new" class="btn btn-secondary"
+            >Créer une nouvelle facture</a
+          >
+        </div>
+      </div>
+    </div>
+    <div class="background">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </body>
+</html>

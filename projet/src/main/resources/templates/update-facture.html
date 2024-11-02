@@ -1,0 +1,61 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Modifier une Facture</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="container fade-in">
+    <div class="card">
+        <h1>Modifier une Facture</h1>
+
+        <form th:action="@{/facture/update/{id}(id=${facture.id})}" th:object="${facture}" method="post">
+            <div class="form-group">
+                <label for="client">Client</label>
+                <select th:field="*{client}" class="form-control" id="client">
+                    <option th:each="client : ${clients}"
+                            th:value="${client.id}"
+                            th:text="${client.nom}">
+                    </option>
+                </select>
+                <span class="error" th:if="${#fields.hasErrors('client')}" th:errors="*{client}"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="montantTotal">Montant Total</label>
+                <input type="number" step="0.01" th:field="*{montantTotal}" class="form-control" id="montantTotal" placeholder="0.00">
+                <span class="error" th:if="${#fields.hasErrors('montantTotal')}" th:errors="*{montantTotal}"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" th:field="*{date}" class="form-control" id="date">
+                <span class="error" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></span>
+            </div>
+
+            <div class="actions">
+                <button type="submit" class="btn btn-primary">Mettre à jour</button>
+                <a href="/" class="btn btn-secondary">Retour à la liste</a>
+            </div>
+        </form>
+    </div>
+</div><div class="background">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+</body>
+</html>

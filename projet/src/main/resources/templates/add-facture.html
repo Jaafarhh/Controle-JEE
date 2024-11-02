@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Créer une Facture</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="container fade-in">
+        <div class="card">
+            <h1>Créer une Facture</h1>
+            <form th:action="@{/facture/add}" th:object="${facture}" method="post">
+                <div class="form-group">
+                    <label for="client">Client</label>
+                    <div class="row">
+                        <div class="menu">
+                            <div class="item">
+                                <a href="#" class="link">
+                                    <span>Sélectionnez un client</span>
+                                    <svg viewBox="0 0 360 360" xml:space="preserve">
+                                        <path
+                                            d="M325.607,79.393c-5.857-5.857-15.355-5.858-21.213,0.001l-139.39,139.393L25.607,79.393 c-5.857-5.857-15.355-5.858-21.213,0.001c-5.858,5.858-5.858,15.355,0,21.213l150.004,150c2.813,2.813,6.628,4.393,10.606,4.393 s7.794-1.581,10.606-4.394l149.996-150C331.465,94.749,331.465,85.251,325.607,79.393z" />
+                                    </svg>
+                                </a>
+                                <div class="submenu">
+                                    <div th:each="client : ${clients}" class="submenu-item">
+                                        <a href="#" class="submenu-link" th:text="${client.nom}"
+                                            th:data-id="${client.id}"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <select th:field="*{client}" id="client" style="display: none">
+                            <option value="">Sélectionnez un client</option>
+                            <option th:each="client : ${clients}" th:value="${client.id}" th:text="${client.nom}">
+                            </option>
+                        </select>
+                        <a href="/client/new" class="add-client-link">
+                            + Ajouter un nouveau client
+                        </a>
+                        <span class="error" th:if="${#fields.hasErrors('client')}" th:errors="*{client}"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="montantTotal">Montant Total</label>
+                    <input type="number" step="0.01" th:field="*{montantTotal}" class="form-control" id="montantTotal"
+                        placeholder="0.00" />
+                    <span class="error" th:if="${#fields.hasErrors('montantTotal')}" th:errors="*{montantTotal}"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="date">Date</label>
+                    <input type="date" th:field="*{date}" class="form-control" id="date" />
+                    <span class="error" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></span>
+                </div>
+
+                <div class="actions">
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    <a href="/" class="btn btn-secondary">Retour à la liste</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="background">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <script>
+        document.querySelectorAll(".submenu-link").forEach((link) => {
+            link.addEventListener("click", function (e) {
+                e.preventDefault();
+                const id = this.getAttribute("data-id");
+                const text = this.textContent;
+                document.querySelector("#client").value = id;
+                document.querySelector(".link span").textContent = text;
+            });
+        });
+    </script>
+</body>
+
+</html>
