@@ -73,6 +73,11 @@ src/
 - Hiérarchie d'héritage des repositories représentée
 - Toutes les contraintes de validation incluses
 ![image](https://github.com/user-attachments/assets/d04a2071-9415-4b94-a128-b13ed678aaab)
+## Video Demo
+
+
+https://github.com/user-attachments/assets/910b7336-9a46-4fee-9b69-6f48aa556fff
+
 ## Installation
 1. Cloner le projet
 2. Configurer application.properties:
@@ -90,12 +95,6 @@ mvn spring-boot:run
 
 ```
 4. Accéder à http://localhost:8080
-## Video Demo
-
-
-https://github.com/user-attachments/assets/910b7336-9a46-4fee-9b69-6f48aa556fff
-
-
 ---
 
 Développé dans le cadre du projet de Contrôle - ENSAJ
