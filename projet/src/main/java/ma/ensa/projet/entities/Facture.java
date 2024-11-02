@@ -21,6 +21,7 @@ public class Facture {
 
     @ManyToOne
     @JoinColumn(name = "client_id", nullable = false)
+    @NotNull(message = "Client is mandatory")
     private Client client;
 
     public Facture() {
