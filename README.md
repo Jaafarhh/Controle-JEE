@@ -22,10 +22,7 @@ Application web développée avec Spring Boot et Thymeleaf pour la gestion des c
 - Effets glassmorphisme
 - Animations fluides
 - Fond dynamique
-- Composants personnalisés:
-  - Menu déroulant moderne
-  - Boutons animés
-  - Tableaux responsifs
+- Composants personnalisés
 ### Technologies Frontend
 - Thymeleaf
 - CSS personnalisé
